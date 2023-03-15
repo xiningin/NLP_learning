@@ -40,7 +40,7 @@ class N_Gram:
         
     def create_dict(self):
         for dime in range(1 , self.dimension+1): # 从1-gram提取到N-grame
-            for item in tqdm(self.train + self.test , desc=f'create gram dict : {self.dimension}-gram'):
+            for item in tqdm(self.train , desc=f'create gram dict : {self.dimension}-gram'):
                 words = item[2].lower().split()
                 for i in range(len(words)-dime +1):
                     tokenized_word = ' '.join(words[i : i+dime])

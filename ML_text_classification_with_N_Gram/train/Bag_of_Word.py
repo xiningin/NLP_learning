@@ -39,7 +39,7 @@ class Bag:
         self.test_matrix = None
     
     def create_bag(self): #得全部转化为小写，其中标点符号不会受其影响
-        for item in tqdm(self.train + self.test , desc='creating word bags'):
+        for item in tqdm(self.train , desc='creating word bags'):
             phrase = item[2].lower()
             words = phrase.split()
             for word in words:
