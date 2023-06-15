@@ -74,7 +74,7 @@ END = '$'
 
 def make_trie(vocab):
     """
-    vocab: a list of all Uni-Gram 、 Bi-Gram(if have , or it can even have Tri-Gram and so on)
+    vocab: a list of all vocabulary(read from vocab.txt in function "preprocessing")
 
     use dictionary trees to store vocabularies for faster queries
     """
