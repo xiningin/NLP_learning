@@ -101,12 +101,15 @@ def get_candidate(trie , word , path='' , edit_distance=1):
     it will return the candidate list of the error word according to the given edit_distance
     """
 
-    # 
+    # In fact, we can simply use queue here, that is, always use "append" directly on the basis of deque, 
+    # and join from the right. In the code, "appendleft" is used to add from the left in some cases, 
+    # which simply realizes the breadth search, but it is not necessary in practice. You can directly 
+    # append to realize the depth search, and the result is the same
     que = deque([(trie , word , '' , edit_distance)])
     while que:
         trie , word , path , edit_distance = que.popleft()
         if word == '':
-        # the first run of the while loop always come here
+            # if comes to the end of a suspected word , add letter if still need to edit the word , or return saved path(modified word) using yield
             if END in trie:
                 yield path
             # add(edit operation) a letter to the end of a word
@@ -115,8 +118,10 @@ def get_candidate(trie , word , path='' , edit_distance=1):
                     if k != END:
                         que.appendleft((trie[k] , '' , path+k , edit_distance-1))
         else:
+            # if in the middle of the suspected word , do all four edit
             if word[0] in trie:
-                # the first letter is a match
+                # the first letter is a match , then we don't need to edit
+                # add to the deque by the left to process it in the next cycle
                 que.appendleft((trie[word[0]] , word[1:] , path+word[0] , edit_distance))
             # no matter whether the initial letter is matched, the process is as follows
             # generate the candidate by edit in one step
