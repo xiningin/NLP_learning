@@ -1,5 +1,17 @@
 import numpy as np
 
+"""
+The overall idea of this model is to use the Bayesian probability combined with the Markov chain 
+to derive the posterior probability based on the prior probability 
+
+prior probability: P(w|c)
+posterior probability: P(c|w)
+c is the correct word 
+w is the word in question
+"""
+
+
+# P(c)
 def language_model(gram_count , V_len , candidate_data , ngram , lamd):
     """
         gram_count: the dict of all vocabulary(or vocab composition) frequency
@@ -34,7 +46,8 @@ def language_model(gram_count , V_len , candidate_data , ngram , lamd):
         
         return np.log(pi)
 
-
+    
+# P(w|c)
 def channel_model(x , y , wrong_reason , corpus , add_matrix , sub_matrix , rev_matrix , del_matrix):
     """
     x: wrong letter in front
