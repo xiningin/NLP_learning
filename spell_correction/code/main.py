@@ -57,7 +57,7 @@ def spell_correct(vocab , test_data , gram_count , corpus , V_len , trie , ngram
                         post_phrase = [candidate] + item[2][1:-1][word_index + 1 : word_index + ngram]
                         
                         p = language_model(gram_count , V_len , pre_phase , ngram , lamd) + \
-                            language_model(gram_count, V, post_phase, ngram, lamd)
+                            language_model(gram_count, V_len , post_phase, ngram, lamd)
                         p += channel_p
                         candi_proba.append(p)
                 
