@@ -72,15 +72,16 @@ def spell_correct(vocab , test_data , gram_count , corpus , V_len , trie , ngram
 if __name__ == '__main__':
     start = time.time()        
     cate = reuters.categories()
+    N_GRAM = 1
 
     print('Doing preprocessing, computing things. Please wait...')
-    vocab, testdata, gram_count, vocab_corpus, corpus_text, V = preprocessing(1, cate)
+    vocab, testdata, gram_count, vocab_corpus, corpus_text, V_len = preprocessing(N_GRAM, cate)
     add_matrix, sub_matrix, rev_matrix, del_matrix = load_confusion_matrix()
     trie = make_trie(vocab)
 
     print('Doing Spell Correcting...')
     lamd = 0.01  # add-lambda smoothing
-    spell_correct(vocab, testdata, gram_count, corpus_text, V, trie, 1, lamd , add_matrix, sub_matrix, rev_matrix, del_matrix)
+    spell_correct(vocab , testdata , gram_count , corpus_text , V_len , trie , N_GRAM , lamd , add_matrix , sub_matrix , rev_matrix , del_matrix)
     
     stop = time.time()
     print('Time: ' + str(stop - start) + '\n')
